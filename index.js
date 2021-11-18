@@ -1,4 +1,4 @@
-const { ethers } = require("ethers");
+const { ethers, utils } = require("ethers");
 const erc20Abi = require("./abis/ERC20.json");
 const assetAbi = require("./abis/Asset.json");
 
@@ -20,7 +20,8 @@ const anyETHAssetAddress = "0xBbc2b12BC8f32d81244D86d66E43D4e6a5A3B6b5";
 const anyETHContract = new ethers.Contract(anyETHAddress, erc20Abi, provider);
 async function checkAnyEthBalance(address) {
   const balance = await anyETHContract.balanceOf(address);
-  console.log(balance);
+  const dp = await anyETHContract.decimals();
+  console.log(utils.formatUnits(balance, dp));
 }
 
 checkAnyEthBalance("0x541c54941bBB237594bbDecE66619952c2EdB228");
@@ -32,7 +33,8 @@ const anyETHAssetContract = new ethers.Contract(
 );
 async function checkAnyEthLPBalance(address) {
   const balance = await anyETHAssetContract.balanceOf(address);
-  console.log(balance);
+  const dp = await anyETHContract.decimals();
+  console.log(utils.formatUnits(balance, dp));
 }
 
 checkAnyEthLPBalance("0x541c54941bBB237594bbDecE66619952c2EdB228");
