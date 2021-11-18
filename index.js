@@ -18,6 +18,16 @@ const anyETHAddress = "0xfe76dea6a07734532dc91686fb5c3e10f9bda5e3";
 const anyETHAssetAddress = "0xBbc2b12BC8f32d81244D86d66E43D4e6a5A3B6b5";
 
 const anyETHContract = new ethers.Contract(anyETHAddress, erc20Abi, provider);
+const anyETHAssetContract = new ethers.Contract(
+  anyETHAssetAddress,
+  assetAbi,
+  provider
+);
+
+/**
+ * check the address's balance of AnyETH token
+ * @param {string} address
+ */
 async function checkAnyEthBalance(address) {
   const balance = await anyETHContract.balanceOf(address);
   const dp = await anyETHContract.decimals();
@@ -26,11 +36,10 @@ async function checkAnyEthBalance(address) {
 
 checkAnyEthBalance("0x541c54941bBB237594bbDecE66619952c2EdB228");
 
-const anyETHAssetContract = new ethers.Contract(
-  anyETHAssetAddress,
-  assetAbi,
-  provider
-);
+/**
+ * check the address's balance of AnyETH LP token
+ * @param {string} address
+ */
 async function checkAnyEthLPBalance(address) {
   const balance = await anyETHAssetContract.balanceOf(address);
   const dp = await anyETHContract.decimals();
