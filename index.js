@@ -54,8 +54,9 @@ const participantsAddresses = [
   "0x47cF50b47c956AbF687912B3b377b40d111864f4",
 ];
 
-Promise.all(participantsAddresses.map((add) => checkAnyEthBalance(add))).then(
-  (balances) => {
-    console.log(balances);
-  }
-);
+// wait for all async function to complete
+Promise.all(
+  participantsAddresses.map((address) => checkAnyEthBalance(address))
+).then((balances) => {
+  console.log(balances);
+});
