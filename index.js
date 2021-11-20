@@ -31,7 +31,7 @@ const anyETHAssetContract = new ethers.Contract(
 async function checkAnyEthBalance(address) {
   const balance = await anyETHContract.balanceOf(address);
   const dp = await anyETHContract.decimals();
-  console.log(utils.formatUnits(balance, dp));
+  return utils.formatUnits(balance, dp);
 }
 
 checkAnyEthBalance("0x541c54941bBB237594bbDecE66619952c2EdB228");
@@ -43,7 +43,19 @@ checkAnyEthBalance("0x541c54941bBB237594bbDecE66619952c2EdB228");
 async function checkAnyEthLPBalance(address) {
   const balance = await anyETHAssetContract.balanceOf(address);
   const dp = await anyETHContract.decimals();
-  console.log(utils.formatUnits(balance, dp));
+  return utils.formatUnits(balance, dp);
 }
 
 checkAnyEthLPBalance("0x541c54941bBB237594bbDecE66619952c2EdB228");
+
+const participantsAddresses = [
+  "0xD4dc7c7AD587E86D7e99649977B51101f85F97BB",
+  "0x49e7F98B3468Bbb8Aa2Fe80282cB6aCa3904C84C",
+  "0x47cF50b47c956AbF687912B3b377b40d111864f4",
+];
+
+Promise.all(participantsAddresses.map((add) => checkAnyEthBalance(add))).then(
+  (balances) => {
+    console.log(balances);
+  }
+);
