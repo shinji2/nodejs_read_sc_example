@@ -24,7 +24,7 @@ async function getTokenBalance(token, address) {
 
 async function main() {
   const csvWriter = createCsvWriter({
-    path: "result.csv",
+    path: "data/result.csv",
     header: [
       { id: "address", title: "address" },
       ...tokens.map((token) => ({ id: token.symbol, title: token.symbol })),
